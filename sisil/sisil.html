@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ya ultah sih</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .container {
+      margin-top: 100px;
+      padding: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 18px;
+      margin: 8px 0;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      font-size: 18px;
+      border: 2px solid black;
+      background: yellow;
+      cursor: pointer;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    #awal {
+      transition: opacity 0.5s ease;
+    }
+
+    #pesan {
+      display: none;
+      margin-top: 30px;
+      animation: turun 1s ease;
+    }
+
+    #emojiBtn {
+      display: none;
+      margin-top: 25px;
+    }
+
+    .line {
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: muncul 0.8s ease forwards;
+    }
+
+    .line:nth-child(1) { animation-delay: 0.3s; }
+    .line:nth-child(2) { animation-delay: 1.1s; }
+    .line:nth-child(3) { animation-delay: 1.9s; }
+    .line:nth-child(4) { animation-delay: 2.7s; }
+    .line:nth-child(5) { animation-delay: 3.5s; }
+    .line:nth-child(6) { animation-delay: 4.3s; }
+
+    @keyframes muncul {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes turun {
+      from {
+        transform: translateY(-30px);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    .jatuh {
+      position: absolute;
+      top: -50px;
+      font-size: 28px;
+      animation: jatoh linear forwards;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    @keyframes jatoh {
+      to {
+        transform: translateY(120vh) rotate(360deg);
+        opacity: 0.8;
+      }
+    }
+
+    .tiny {
+      font-size: 12px;
+      color: #666;
+      margin-top: 30px;
+    }
+
+    .side-img {
+      display: none;
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 180px;
+      max-width: 22vw;
+      z-index: 0;
+      animation: goyang 1.2s ease-in-out infinite alternate;
+    }
+
+    .left-img {
+      left: 20px;
+    }
+
+    .right-img {
+      right: 20px;
+    }
+
+    @keyframes goyang {
+      from {
+        transform: translateY(-50%) rotate(-4deg);
+      }
+      to {
+        transform: translateY(-50%) rotate(4deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <img id="gambarKiri" class="side-img left-img" src="https://drive.google.com/file/d/1Zk_m1hq5wDPS1G23tmz4FaqTBjK8Ugg9/view?usp=sharing" alt="gambar kiri">
+  <img id="gambarKanan" class="side-img right-img" src="https://drive.google.com/file/d/1Zk_m1hq5wDPS1G23tmz4FaqTBjK8Ugg9/view?usp=sharing" alt="gambar kanan">
+
+  <div class="container">
+    <div id="awal">
+      <h1>warning</h1>
+      <p>website ini dibuat dengan niat seadanya</p>
+      <p>tetap dibuka karena aku terlanjur bikin</p>
+      <button onclick="mulaiAcara()">pencet aja deh</button>
+    </div>
+
+    <div id="pesan">
+      <h1 class="line">HBD KAK 🎉</h1>
+      <p class="line">selamat ya umur nambah lagi WKWK</p>
+      <p class="line">semoga sehat, bahagia, dan nga banyak drama</p>
+      <p class="line">yg jelas tetep samawa yeach</p>
+      <p class="line">manifesting kaya raya </p>
+      <p class="line">BNI 1688545922 Spay 089607642833</p>
+      <button id="emojiBtn" onclick="hujanAbsurd()">keluarin emoji lagi dong</button>
+    </div>
+
+    <p class="tiny">budget desain: seniatnya</p>
+  </div>
+
+  <script>
+    let sudahMulai = false;
+
+    function mulaiAcara() {
+      if (sudahMulai) return;
+      sudahMulai = true;
+
+      document.getElementById('awal').style.display = 'none';
+      document.getElementById('pesan').style.display = 'block';
+      document.getElementById('emojiBtn').style.display = 'inline-block';
+      document.getElementById('gambarKiri').style.display = 'block';
+      document.getElementById('gambarKanan').style.display = 'block';
+
+      hujanAbsurd();
+    }
+
+    function hujanAbsurd() {
+      const isi = ['🎉', '🎂', '😭', '🔥', '💀', '⭐', '😱', '💥', '🫨', '💖', '✨', '🎊'];
+      const totalEmoji = 180;
+
+      for (let i = 0; i < totalEmoji; i++) {
+        setTimeout(() => {
+          const benda = document.createElement('div');
+          benda.className = 'jatuh';
+          benda.innerText = isi[Math.floor(Math.random() * isi.length)];
+          benda.style.left = Math.random() * window.innerWidth + 'px';
+          benda.style.animationDuration = (1.5 + Math.random() * 2.5) + 's';
+          benda.style.fontSize = (28 + Math.random() * 60) + 'px';
+          benda.style.transform = 'translateX(' + ((Math.random() * 120) - 60) + 'px)';
+          document.body.appendChild(benda);
+
+          setTimeout(() => {
+            benda.remove();
+          }, 4500);
+        }, i * 25);
+      }
+    }
+  </script>
+</body>
+</html>
