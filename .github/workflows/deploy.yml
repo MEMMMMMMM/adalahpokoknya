@@ -1,5 +1,2 @@
-- name: Deploy Script to Bunny Edge Scripting
-  uses: BunnyWay/actions/deploy-script@main
-  with:
-    script_id: 68937
-    file: "script.ts"
+- name: Upload to Bunny
+  uses: ayeressian/bunnycdn-storage-deploy@v2.2.3
