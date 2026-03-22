@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
@@ -20,14 +20,27 @@
     .container {
       width: 100%;
       max-width: 900px;
-      margin: 40px auto;
-      padding: 30px 20px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
       position: relative;
       z-index: 2;
+    }
 
-      background: rgba(255,255,255,0.5);
+    /* CARD TENGAH */
+    .card {
+      background: rgba(255,255,255,0.75);
       backdrop-filter: blur(6px);
       border-radius: 20px;
+      padding: 30px 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      max-width: 600px;
+      margin: auto;
+      animation: pop 0.5s ease;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
     }
 
     h1 {
@@ -62,26 +75,9 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      position: relative;
     }
 
     .screen.active { display: flex; }
-
-    /* BACKGROUND BLUR PUTIH */
-    .screen::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(255,255,255,0.4);
-      backdrop-filter: blur(9px);
-      z-index: 1;
-      border-radius: 20px;
-    }
-
-    .screen > * {
-      position: relative;
-      z-index: 2;
-    }
 
     .line {
       opacity: 0;
@@ -133,7 +129,7 @@
       to { transform: translateY(-50%) rotate(4deg); }
     }
 
-    /* MOBILE FIX */
+    /* MOBILE */
     @media (max-width: 480px) {
       .side-img {
         display: block;
@@ -145,14 +141,8 @@
         opacity: 0.9;
       }
 
-      .left-img {
-        top: 10px;
-      }
-
-      .right-img {
-        bottom: 10px;
-        top: auto;
-      }
+      .left-img { top: 10px; }
+      .right-img { bottom: 10px; top: auto; }
 
       .container {
         padding-top: 140px;
@@ -172,30 +162,39 @@
 
 <div class="container">
 
+  <!-- SCREEN 1 -->
   <div id="screenAwal" class="screen active">
-    <h1>warning</h1>
-    <p>pesan ini dibuat dengan niat seadanya</p>
-    <p>tetap dibuka karena aku terlanjur bikin</p>
-    <button onclick="mulaiAcara()">pencettt</button>
+    <div class="card">
+      <h1>warning</h1>
+      <p>pesan ini dibuat dengan niat seadanya</p>
+      <p>tetap dibuka karena aku terlanjur bikin</p>
+      <button onclick="mulaiAcara()">pencettt</button>
+    </div>
   </div>
 
+  <!-- SCREEN 2 -->
   <div id="screenHbd" class="screen">
-    <h1 class="line">HBD KAQ 🎉</h1>
-    <p class="line">alhamdulillah umur nambah lagi WKWK</p>
-    <p class="line">semoga sehat, bahagia, dan nga banyak drama</p>
-    <p class="line">tetep samawa yeach</p>
-    <p class="line">manifesting kaya raya</p>
-    <p class="line">ingfo bukber</p>
+    <div class="card">
+      <h1 class="line">HBD KAQ 🎉</h1>
+      <p class="line">alhamdulillah umur nambah lagi WKWK</p>
+      <p class="line">semoga sehat, bahagia, dan nga banyak drama</p>
+      <p class="line">tetep samawa yeach</p>
+      <p class="line">manifesting kaya raya</p>
+      <p class="line">ingfo bukber</p>
 
-    <button onclick="hujanAbsurd()">spam emot</button>
-    <button onclick="showCakeScreen()">mau kue 🎂</button>
+      <button onclick="hujanAbsurd()">spam emot</button>
+      <button onclick="showCakeScreen()">mau kue 🎂</button>
+    </div>
   </div>
 
+  <!-- SCREEN 3 -->
   <div id="screenCake" class="screen">
-    <h1>nih kuenya 🎂</h1>
-    <img src="kue.jpg" style="width:250px;border-radius:12px;">
-    <p>semoga hidupmu semanis kue ini</p>
-    <button onclick="hujanAbsurd()">spam emot</button>
+    <div class="card">
+      <h1>nih kuenya 🎂</h1>
+      <img src="kue.jpg" style="width:250px;border-radius:12px;">
+      <p>semoga hidupmu semanis kue ini</p>
+      <button onclick="hujanAbsurd()">spam emot</button>
+    </div>
   </div>
 
 </div>
