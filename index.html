@@ -68,8 +68,8 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(255,255,255,0.75);
-      backdrop-filter: blur(6px);
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(4px);
       z-index: 1;
       border-radius: 20px;
     }
@@ -99,7 +99,7 @@
     .jatuh {
       position: fixed;
       top: -80px;
-      z-index: 0;
+      z-index: -1;
       pointer-events: none;
       animation: jatoh linear forwards;
     }
@@ -107,7 +107,7 @@
     @keyframes jatoh {
       to {
         transform: translateY(120vh) rotate(360deg);
-        opacity: 0.95;
+        opacity: 0.85;
       }
     }
 
