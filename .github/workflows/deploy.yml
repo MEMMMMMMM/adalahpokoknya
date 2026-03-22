@@ -1,2 +1,0 @@
-- name: Upload to Bunny
-  uses: ayeressian/bunnycdn-storage-deploy@v2.2.3
