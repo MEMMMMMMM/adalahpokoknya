@@ -110,7 +110,7 @@
 <body>
 
 <!-- AUDIO -->
-<audio id="lagu" src="lagu.mp3"></audio>
+<audio id="lagu" src="./lagu.mp3"></audio>
 
 <!-- gambar samping -->
 <img id="gambarKiri" class="side-img left-img" src="kiri.jpeg">
@@ -169,11 +169,17 @@ function mulaiAcara() {
   if (sudahMulai) return;
   sudahMulai = true;
 
-  // PLAY LAGU
   const lagu = document.getElementById('lagu');
-  lagu.volume = 0.5;
+  lagu.volume = 0.7;
   lagu.loop = true;
-  lagu.play();
+
+  // trik biar pasti ke-trigger
+  lagu.currentTime = 0;
+  lagu.play().then(() => {
+    console.log("lagu jalan");
+  }).catch(err => {
+    console.log("error play:", err);
+  });
 
   gantiScreen('screenHbd');
 
@@ -182,7 +188,6 @@ function mulaiAcara() {
 
   hujanAbsurd();
 }
-
 function showCakeScreen() {
   gantiScreen('screenCake');
   hujanAbsurd();
@@ -218,7 +223,7 @@ function hujanGambar() {
       img.className = 'jatuh';
       img.src = gambarHujan[Math.floor(Math.random()*gambarHujan.length)];
       img.style.left = Math.random()*window.innerWidth + 'px';
-      img.style.width = (80 + Math.random()*120) + 'px'; // gede
+      img.style.width = (80 + Math.random()*100) + 'px'; // gede
       img.style.animationDuration = (3 + Math.random()*3) + 's';
       document.body.appendChild(img);
       setTimeout(()=>img.remove(),5500);
