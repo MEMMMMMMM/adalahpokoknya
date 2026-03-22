@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
@@ -105,6 +105,34 @@
       from { transform: translateY(-50%) rotate(-4deg); }
       to { transform: translateY(-50%) rotate(4deg); }
     }
+
+    @media (max-width: 480px) {
+      .side-img {
+        display: block;
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 110px;
+        z-index: 0;
+        animation: none;
+        opacity: 0.9;
+      }
+
+      .left-img {
+        top: 10px;   /* jadi atas */
+      }
+
+      .right-img {
+        bottom: 10px; /* jadi bawah */
+        top: auto;
+      }
+
+      .container {
+        padding-top: 130px;
+        padding-bottom: 130px;
+      }
+    }
+
   </style>
 </head>
 <body>
