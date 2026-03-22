@@ -193,6 +193,7 @@
 
 <script>
 let sudahMulai = false;
+let intervalHujan;
 
 const gambarHujan = ["pic1.png","pic2.png","pic3.png","pic4.png","pic5.png"];
 
@@ -226,6 +227,14 @@ function showCakeScreen(){
 function hujanAbsurd(){
   hujanEmoji();
   hujanGambar();
+
+  // loop tiap 3 detik
+  if (!intervalHujan) {
+    intervalHujan = setInterval(() => {
+      hujanEmoji();
+      hujanGambar();
+    }, 3000);
+  }
 }
 
 function hujanEmoji(){
