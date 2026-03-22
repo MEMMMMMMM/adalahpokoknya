@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ya ultah sih</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -32,14 +30,11 @@
     h1 {
       font-size: clamp(32px, 7vw, 56px);
       margin-bottom: 10px;
-      line-height: 1.15;
     }
 
     p {
       font-size: clamp(16px, 3.6vw, 22px);
       margin: 8px 0;
-      line-height: 1.5;
-      word-break: break-word;
     }
 
     button {
@@ -47,13 +42,8 @@
       padding: 12px 20px;
       font-size: clamp(16px, 3.6vw, 20px);
       border: 2px solid black;
-      background: yellow;
+      background: pink;
       cursor: pointer;
-      max-width: 90%;
-    }
-
-    button:hover {
-      transform: scale(1.05);
     }
 
     .screen {
@@ -62,24 +52,9 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      padding: 30px 0;
     }
 
-    .screen.active {
-      display: flex;
-    }
-
-    #pesan,
-    #cakeScreen {
-      margin-top: 20px;
-      animation: turun 0.8s ease;
-    }
-
-    #emojiBtn,
-    #cakeBtn {
-      display: inline-block;
-      margin-top: 20px;
-    }
+    .screen.active { display: flex; }
 
     .line {
       opacity: 0;
@@ -88,28 +63,14 @@
     }
 
     .line:nth-child(1) { animation-delay: 0.3s; }
-    .line:nth-child(2) { animation-delay: 1.0s; }
+    .line:nth-child(2) { animation-delay: 1s; }
     .line:nth-child(3) { animation-delay: 1.7s; }
     .line:nth-child(4) { animation-delay: 2.4s; }
     .line:nth-child(5) { animation-delay: 3.1s; }
     .line:nth-child(6) { animation-delay: 3.8s; }
 
     @keyframes muncul {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes turun {
-      from {
-        transform: translateY(-30px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .jatuh {
@@ -117,9 +78,7 @@
       top: -80px;
       z-index: 1;
       pointer-events: none;
-      animation-name: jatoh;
-      animation-timing-function: linear;
-      animation-fill-mode: forwards;
+      animation: jatoh linear forwards;
     }
 
     @keyframes jatoh {
@@ -129,253 +88,144 @@
       }
     }
 
-    .tiny {
-      font-size: 12px;
-      color: #666;
-      margin-top: 28px;
-    }
-
     .side-img {
       display: none;
       position: fixed;
       top: 50%;
       transform: translateY(-50%);
-      width: clamp(90px, 18vw, 180px);
-      max-width: 22vw;
+      width: 120px;
       z-index: 0;
-      animation: goyang 1.2s ease-in-out infinite alternate;
-      border-radius: 12px;
+      animation: goyang 1.2s infinite alternate;
     }
 
-    .left-img {
-      left: 10px;
-    }
-
-    .right-img {
-      right: 10px;
-    }
+    .left-img { left: 10px; }
+    .right-img { right: 10px; }
 
     @keyframes goyang {
-      from {
-        transform: translateY(-50%) rotate(-4deg);
-      }
-      to {
-        transform: translateY(-50%) rotate(4deg);
-      }
-    }
-
-    .cake-wrap {
-      margin-top: 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .cake-img {
-      width: min(280px, 70vw);
-      max-width: 100%;
-      animation: popIn 0.7s ease;
-      border-radius: 16px;
-    }
-
-    .cake-text {
-      font-size: clamp(18px, 4vw, 24px);
-      font-weight: bold;
-      padding: 0 10px;
-    }
-
-    @keyframes popIn {
-      from {
-        transform: scale(0.7);
-        opacity: 0;
-      }
-      to {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-
-    @media (max-width: 700px) {
-      .side-img {
-        width: 95px;
-        max-width: none;
-        opacity: 0.9;
-      }
-
-      .left-img {
-        left: 4px;
-      }
-
-      .right-img {
-        right: 4px;
-      }
-
-      .container {
-        padding: 20px 12px 32px;
-      }
-
-      button {
-        width: auto;
-      }
-    }
-
-    
-    @media (max-width: 480px) {
-      .side-img {
-        width: 110px;
-        top: 16%;
-        transform: none;
-        animation: none;
-      }
-
-      .left-img {
-        left: 8px;
-      }
-
-      .right-img {
-        right: 8px;
-      }
+      from { transform: translateY(-50%) rotate(-4deg); }
+      to { transform: translateY(-50%) rotate(4deg); }
     }
   </style>
 </head>
 <body>
-  <!-- gambar samping -->
-  <img id="gambarKiri" class="side-img left-img" src="kiri.jpeg" alt="gambar kiri">
-  <img id="gambarKanan" class="side-img right-img" src="kanan.jpeg" alt="gambar kanan">
 
-  <div class="container">
-    <!-- SCREEN 1 -->
-    <div id="screenAwal" class="screen active">
-      <div id="awal">
-        <h1>warning</h1>
-        <p>pesan ini dibuat dengan niat seadanya</p>
-        <p>tetap dibuka karena aku terlanjur bikin</p>
-        <button onclick="mulaiAcara()">pencettt</button>
-      </div>
-      <p class="tiny">budget desain: seniatnya</p>
-    </div>
+<!-- AUDIO -->
+<audio id="lagu" src="lagu.mp3"></audio>
 
-    <!-- SCREEN 2 -->
-    <div id="screenHbd" class="screen">
-      <div id="pesan">
-        <h1 class="line">HBD KAQ 🎉</h1>
-        <p class="line">alhamdulillah umur nambah lagi WKWK</p>
-        <p class="line">semoga sehat, bahagia, dan nga banyak drama</p>
-        <p class="line">yg jelas tetep samawa yeach</p>
-        <p class="line">manifesting kaya raya</p>
-        <p class="line">ingfo bukber</p>
+<!-- gambar samping -->
+<img id="gambarKiri" class="side-img left-img" src="kiri.jpeg">
+<img id="gambarKanan" class="side-img right-img" src="kanan.jpeg">
 
-        <button id="emojiBtn" onclick="hujanAbsurd()">spam emot</button>
-        <br>
-        <button id="cakeBtn" onclick="showCakeScreen()">mau kue dong 🎂</button>
-      </div>
-      <p class="tiny">budget desain: seniatnya</p>
-    </div>
+<div class="container">
 
-    <!-- SCREEN 3 -->
-    <div id="screenCake" class="screen">
-      <div id="cakeScreen">
-        <h1>nih kuenya 🎂</h1>
-        <div class="cake-wrap">
-          <img
-            class="cake-img"
-            src="kue.jpg"
-            alt="kue ultah"
-          >
-          <p class="cake-text">semoga hidupmu semanis kue ini (transferannya jg makin maniesz)</p>
-          <button onclick="hujanAbsurd()">spam emot</button>
-        </div>
-      </div>
-      <p class="tiny">budget kue: sedapetnya gambar</p>
-    </div>
+  <!-- SCREEN 1 -->
+  <div id="screenAwal" class="screen active">
+    <h1>warning</h1>
+    <p>pesan ini dibuat dengan niat seadanya</p>
+    <p>tetap dibuka karena aku terlanjur bikin</p>
+    <button onclick="mulaiAcara()">pencettt</button>
   </div>
 
-  <script>
-    let sudahMulai = false;
+  <!-- SCREEN 2 -->
+  <div id="screenHbd" class="screen">
+    <h1 class="line">HBD KAQ 🎉</h1>
+    <p class="line">alhamdulillah umur nambah lagi WKWK</p>
+    <p class="line">semoga sehat, bahagia, dan nga banyak drama</p>
+    <p class="line">tetep samawa yeach</p>
+    <p class="line">manifesting kaya raya</p>
+    <p class="line">ingfo bukber</p>
 
-    const gambarHujan = [
-      "pic1.png",
-      "pic2.png",
-      "pic3.ong",
-      "pic4.png",
-      "pic5.png",
-    ];
+    <button onclick="hujanAbsurd()">spam emot</button>
+    <button onclick="showCakeScreen()">mau kue 🎂</button>
+  </div>
 
-    function gantiScreen(id) {
-      document.querySelectorAll('.screen').forEach(screen => {
-        screen.classList.remove('active');
-      });
-      document.getElementById(id).classList.add('active');
-    }
+  <!-- SCREEN 3 -->
+  <div id="screenCake" class="screen">
+    <h1>nih kuenya 🎂</h1>
+    <img src="kue.jpg" style="width:250px;border-radius:12px;">
+    <p>semoga hidupmu semanis kue ini</p>
+    <button onclick="hujanAbsurd()">spam emot</button>
+  </div>
 
-    function mulaiAcara() {
-      if (sudahMulai) return;
-      sudahMulai = true;
+</div>
 
-      gantiScreen('screenHbd');
+<script>
+let sudahMulai = false;
 
-      document.getElementById('gambarKiri').style.display = 'block';
-      document.getElementById('gambarKanan').style.display = 'block';
+const gambarHujan = [
+  "pic1.png",
+  "pic2.png",
+  "pic3.png",
+  "pic4.png",
+  "pic5.png"
+];
 
-      hujanAbsurd();
-    }
+function gantiScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
 
-    function showCakeScreen() {
-      gantiScreen('screenCake');
-      hujanAbsurd();
-    }
+function mulaiAcara() {
+  if (sudahMulai) return;
+  sudahMulai = true;
 
-    function hujanAbsurd() {
-      hujanEmoji();
-      hujanGambar();
-    }
+  // PLAY LAGU
+  const lagu = document.getElementById('lagu');
+  lagu.volume = 0.5;
+  lagu.loop = true;
+  lagu.play();
 
-    function hujanEmoji() {
-      const isi = ['🎉', '🎂', '😭', '🔥', '💀', '⭐', '😱', '💥', '🫨', '💖', '✨', '🎊'];
-      const totalEmoji = 140;
+  gantiScreen('screenHbd');
 
-      for (let i = 0; i < totalEmoji; i++) {
-        setTimeout(() => {
-          const benda = document.createElement('div');
-          benda.className = 'jatuh';
-          benda.innerText = isi[Math.floor(Math.random() * isi.length)];
-          benda.style.left = Math.random() * window.innerWidth + 'px';
-          benda.style.fontSize = (12 + Math.random() * 20) + 'px';
-          benda.style.animationDuration = (1.8 + Math.random() * 2.5) + 's';
-          document.body.appendChild(benda);
+  document.getElementById('gambarKiri').style.display = 'block';
+  document.getElementById('gambarKanan').style.display = 'block';
 
-          setTimeout(() => {
-            benda.remove();
-          }, 5000);
-        }, i * 22);
-      }
-    }
+  hujanAbsurd();
+}
 
-    function hujanGambar() {
-      const totalGambar = 45;
+function showCakeScreen() {
+  gantiScreen('screenCake');
+  hujanAbsurd();
+}
 
-      for (let i = 0; i < totalGambar; i++) {
-        setTimeout(() => {
-          const img = document.createElement('img');
-          img.className = 'jatuh';
-          img.src = gambarHujan[Math.floor(Math.random() * gambarHujan.length)];
-          img.style.left = Math.random() * window.innerWidth + 'px';
-          img.style.width = (80 + Math.random() * 100) + 'px';
-          img.style.height = 'auto';
-          img.style.animationDuration = (3 + Math.random() * 3) + 's';
-          document.body.appendChild(img);
+function hujanAbsurd() {
+  hujanEmoji();
+  hujanGambar();
+}
 
-          setTimeout(() => {
-            img.remove();
-          }, 5500);
-        }, i * 90);
-      }
-    }
-  </script>
+// EMOJI (LEBIH KECIL)
+function hujanEmoji() {
+  const isi = ['🎉','🎂','😭','🔥','💀','⭐','😱','💥','💖','✨','🎊'];
+  for (let i = 0; i < 120; i++) {
+    setTimeout(() => {
+      const e = document.createElement('div');
+      e.className = 'jatuh';
+      e.innerText = isi[Math.floor(Math.random()*isi.length)];
+      e.style.left = Math.random()*window.innerWidth + 'px';
+      e.style.fontSize = (10 + Math.random()*20) + 'px'; // kecil
+      e.style.animationDuration = (2 + Math.random()*2) + 's';
+      document.body.appendChild(e);
+      setTimeout(()=>e.remove(),5000);
+    }, i*20);
+  }
+}
+
+// GAMBAR (LEBIH GEDE)
+function hujanGambar() {
+  for (let i = 0; i < 40; i++) {
+    setTimeout(() => {
+      const img = document.createElement('img');
+      img.className = 'jatuh';
+      img.src = gambarHujan[Math.floor(Math.random()*gambarHujan.length)];
+      img.style.left = Math.random()*window.innerWidth + 'px';
+      img.style.width = (80 + Math.random()*120) + 'px'; // gede
+      img.style.animationDuration = (3 + Math.random()*3) + 's';
+      document.body.appendChild(img);
+      setTimeout(()=>img.remove(),5500);
+    }, i*80);
+  }
+}
+</script>
+
 </body>
 </html>
-
-
-
-
