@@ -1,9 +1,10 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ya ultah sih</title>
+
   <style>
     * { box-sizing: border-box; }
 
@@ -13,9 +14,7 @@
       background: #f2f2f2;
       text-align: center;
       overflow-x: hidden;
-      overflow-y: auto;
       min-height: 100vh;
-      position: relative;
     }
 
     .container {
@@ -42,8 +41,15 @@
       padding: 12px 20px;
       font-size: clamp(16px, 3.6vw, 20px);
       border: 2px solid black;
-      background: pink;
+      background: #ff69b4;
+      color: white;
+      border-radius: 10px;
       cursor: pointer;
+    }
+
+    button:hover {
+      background: #ff85c1;
+      transform: scale(1.05);
     }
 
     .screen {
@@ -52,31 +58,48 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
+      position: relative;
     }
 
     .screen.active { display: flex; }
 
+    /* BACKGROUND BLUR PUTIH */
+    .screen::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(6px);
+      z-index: 1;
+      border-radius: 20px;
+    }
+
+    .screen > * {
+      position: relative;
+      z-index: 2;
+    }
+
     .line {
       opacity: 0;
       transform: translateY(-20px);
-      animation: muncul 0.8s ease forwards;
+      animation: muncul 0.8s forwards;
     }
 
-    .line:nth-child(1) { animation-delay: 0.3s; }
-    .line:nth-child(2) { animation-delay: 1s; }
-    .line:nth-child(3) { animation-delay: 1.7s; }
-    .line:nth-child(4) { animation-delay: 2.4s; }
-    .line:nth-child(5) { animation-delay: 3.1s; }
-    .line:nth-child(6) { animation-delay: 3.8s; }
+    .line:nth-child(1){animation-delay:.3s}
+    .line:nth-child(2){animation-delay:1s}
+    .line:nth-child(3){animation-delay:1.7s}
+    .line:nth-child(4){animation-delay:2.4s}
+    .line:nth-child(5){animation-delay:3.1s}
+    .line:nth-child(6){animation-delay:3.8s}
 
     @keyframes muncul {
-      to { opacity: 1; transform: translateY(0); }
+      to { opacity:1; transform:translateY(0); }
     }
 
     .jatuh {
       position: fixed;
       top: -80px;
-      z-index: 1;
+      z-index: 0;
       pointer-events: none;
       animation: jatoh linear forwards;
     }
@@ -106,6 +129,7 @@
       to { transform: translateY(-50%) rotate(4deg); }
     }
 
+    /* MOBILE FIX */
     @media (max-width: 480px) {
       .side-img {
         display: block;
@@ -113,40 +137,37 @@
         left: 50%;
         transform: translateX(-50%);
         width: 110px;
-        z-index: 0;
         animation: none;
         opacity: 0.9;
       }
 
       .left-img {
-        top: 10px;   /* jadi atas */
+        top: 10px;
       }
 
       .right-img {
-        bottom: 10px; /* jadi bawah */
+        bottom: 10px;
         top: auto;
       }
 
       .container {
-        padding-top: 130px;
-        padding-bottom: 130px;
+        padding-top: 140px;
+        padding-bottom: 140px;
       }
     }
 
   </style>
 </head>
+
 <body>
 
-<!-- AUDIO -->
 <audio id="lagu" src="./lagu.mp3"></audio>
 
-<!-- gambar samping -->
 <img id="gambarKiri" class="side-img left-img" src="kiri.jpeg">
 <img id="gambarKanan" class="side-img right-img" src="kanan.jpeg">
 
 <div class="container">
 
-  <!-- SCREEN 1 -->
   <div id="screenAwal" class="screen active">
     <h1>warning</h1>
     <p>pesan ini dibuat dengan niat seadanya</p>
@@ -154,7 +175,6 @@
     <button onclick="mulaiAcara()">pencettt</button>
   </div>
 
-  <!-- SCREEN 2 -->
   <div id="screenHbd" class="screen">
     <h1 class="line">HBD KAQ 🎉</h1>
     <p class="line">alhamdulillah umur nambah lagi WKWK</p>
@@ -167,7 +187,6 @@
     <button onclick="showCakeScreen()">mau kue 🎂</button>
   </div>
 
-  <!-- SCREEN 3 -->
   <div id="screenCake" class="screen">
     <h1>nih kuenya 🎂</h1>
     <img src="kue.jpg" style="width:250px;border-radius:12px;">
@@ -180,82 +199,68 @@
 <script>
 let sudahMulai = false;
 
-const gambarHujan = [
-  "pic1.png",
-  "pic2.png",
-  "pic3.png",
-  "pic4.png",
-  "pic5.png"
-];
+const gambarHujan = ["pic1.png","pic2.png","pic3.png","pic4.png","pic5.png"];
 
-function gantiScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+function gantiScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
-function mulaiAcara() {
-  if (sudahMulai) return;
+function mulaiAcara(){
+  if(sudahMulai) return;
   sudahMulai = true;
 
   const lagu = document.getElementById('lagu');
   lagu.volume = 0.4;
   lagu.loop = true;
-
-  // trik biar pasti ke-trigger
-  lagu.currentTime = 0;
-  lagu.play().then(() => {
-    console.log("lagu jalan");
-  }).catch(err => {
-    console.log("error play:", err);
-  });
+  lagu.play().catch(e=>console.log(e));
 
   gantiScreen('screenHbd');
 
-  document.getElementById('gambarKiri').style.display = 'block';
-  document.getElementById('gambarKanan').style.display = 'block';
+  document.getElementById('gambarKiri').style.display='block';
+  document.getElementById('gambarKanan').style.display='block';
 
   hujanAbsurd();
 }
-function showCakeScreen() {
+
+function showCakeScreen(){
   gantiScreen('screenCake');
   hujanAbsurd();
 }
 
-function hujanAbsurd() {
+function hujanAbsurd(){
   hujanEmoji();
   hujanGambar();
 }
 
-// EMOJI (LEBIH KECIL)
-function hujanEmoji() {
-  const isi = ['🎉','🎂','😭','🔥','💀','⭐','😱','💥','💖','✨','🎊'];
-  for (let i = 0; i < 120; i++) {
-    setTimeout(() => {
-      const e = document.createElement('div');
-      e.className = 'jatuh';
-      e.innerText = isi[Math.floor(Math.random()*isi.length)];
-      e.style.left = Math.random()*window.innerWidth + 'px';
-      e.style.fontSize = (10 + Math.random()*20) + 'px'; // kecil
-      e.style.animationDuration = (2 + Math.random()*2) + 's';
+function hujanEmoji(){
+  const isi=['🎉','🎂','😭','🔥','💀','⭐','😱','💥','💖','✨','🎊'];
+  for(let i=0;i<120;i++){
+    setTimeout(()=>{
+      const e=document.createElement('div');
+      e.className='jatuh';
+      e.innerText=isi[Math.floor(Math.random()*isi.length)];
+      e.style.left=Math.random()*window.innerWidth+'px';
+      e.style.fontSize=(10+Math.random()*20)+'px';
+      e.style.animationDuration=(2+Math.random()*2)+'s';
       document.body.appendChild(e);
       setTimeout(()=>e.remove(),5000);
-    }, i*20);
+    },i*20);
   }
 }
 
-// GAMBAR (LEBIH GEDE)
-function hujanGambar() {
-  for (let i = 0; i < 40; i++) {
-    setTimeout(() => {
-      const img = document.createElement('img');
-      img.className = 'jatuh';
-      img.src = gambarHujan[Math.floor(Math.random()*gambarHujan.length)];
-      img.style.left = Math.random()*window.innerWidth + 'px';
-      img.style.width = (60 + Math.random()*80) + 'px'; // gede
-      img.style.animationDuration = (3 + Math.random()*3) + 's';
+function hujanGambar(){
+  for(let i=0;i<40;i++){
+    setTimeout(()=>{
+      const img=document.createElement('img');
+      img.className='jatuh';
+      img.src=gambarHujan[Math.floor(Math.random()*gambarHujan.length)];
+      img.style.left=Math.random()*window.innerWidth+'px';
+      img.style.width=(60+Math.random()*80)+'px';
+      img.style.animationDuration=(3+Math.random()*3)+'s';
       document.body.appendChild(img);
       setTimeout(()=>img.remove(),5500);
-    }, i*75);
+    },i*75);
   }
 }
 </script>
