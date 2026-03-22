@@ -251,11 +251,11 @@ function hujanGambar() {
       img.className = 'jatuh';
       img.src = gambarHujan[Math.floor(Math.random()*gambarHujan.length)];
       img.style.left = Math.random()*window.innerWidth + 'px';
-      img.style.width = (80 + Math.random()*100) + 'px'; // gede
+      img.style.width = (60 + Math.random()*80) + 'px'; // gede
       img.style.animationDuration = (3 + Math.random()*3) + 's';
       document.body.appendChild(img);
       setTimeout(()=>img.remove(),5500);
-    }, i*80);
+    }, i*75);
   }
 }
 </script>
